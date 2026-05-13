@@ -1,23 +1,26 @@
-// Import fungsi-fungsi yang diperlukan dari SDK Firebase
-import { initializeApp, getApps, getApp } from "firebase/app";
+// Import Firebase
+import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAnalytics } from "firebase/analytics";
 
-// 1. Ambil data konfigurasi ini dari Firebase Console (Project Settings > General)
+// Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyDxNc96WQeYkpnZKUvLn-RMTUHUrAgh-Bw", // Ganti dengan API Key milikmu
-  authDomain: "nongkrong-solo.firebaseapp.com",
-  projectId: "nongkrong-solo",
-  storageBucket: "nongkrong-solo.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef..."
+  apiKey: "AIzaSyDxNc96WQeYkpnZKUvLn-RMTUHUrAgh-Bw",
+  authDomain: "nongska26.firebaseapp.com",
+  databaseURL: "https://nongska26-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "nongska26",
+  storageBucket: "nongska26.appspot.com",
+  messagingSenderId: "95734642465",
+  appId: "1:95734642465:web:a093e13c133af006273060",
+  measurementId: "G-13SP65RCWH"
 };
 
-// 2. Inisialisasi Firebase
-// Kode ini memastikan agar Firebase tidak di-inisialisasi ulang setiap kali kamu save file (hot-reload)
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-// 3. EXPORT variabel db agar bisa dipanggil di file page.tsx
-// Tanpa kata 'export', file lain tidak akan bisa menemukan 'db'
-export const db = getFirestore(app); 
-export const auth = getAuth(app);
+// Firestore DB (INI YANG KURANG)
+export const db = getFirestore(app);
+
+// Analytics (hanya jalan di browser)
+export const analytics =
+  typeof window !== "undefined" ? getAnalytics(app) : null;
